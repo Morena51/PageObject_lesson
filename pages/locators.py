@@ -14,3 +14,9 @@ class LoginPageLocators(object):
     REGISTRATION_PASSWORD_REPIAD=(By.CSS_SELECTOR,"input[name=registration-password2]")
     BUTTON_REGISTRATION=(By.CSS_SELECTOR,"button[name='registration_submit']")
     url="login"
+class ProductPageLocators(object):
+    BUTTON_ADD_TO_BASKET=(By.CSS_SELECTOR,".btn-add-to-basket")
+    PRODUCT_NAME=(By.CSS_SELECTOR,".product_main>h1")
+    PRODUCT_PRICE=(By.CSS_SELECTOR,".product_main>p.price_color")
+    BASKET_MESSAGE=(By.CSS_SELECTOR,".alert:nth-child(1) strong")
+    BASKET_PRICE=(By.CSS_SELECTOR,".alert:nth-child(3) strong")

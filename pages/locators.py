@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By
 
 class BasePageLocators(object):
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    LOGIN_LINK = (By.CSS_SELECTOR, "#registration_link")
+    #LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_LINK=(By.CSS_SELECTOR, ".btn-group a.btn.btn-default")
 class MainPageLocators(object):
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
@@ -23,3 +24,7 @@ class ProductPageLocators(object):
     PRODUCT_PRICE=(By.CSS_SELECTOR,".product_main>p.price_color")
     BASKET_MESSAGE=(By.CSS_SELECTOR,".alert:nth-child(1) strong")
     BASKET_PRICE=(By.CSS_SELECTOR,".alert:nth-child(3) strong")
+
+class CardPageLocators(object):
+    BASKET_EMPTY_TEXT=(By.CSS_SELECTOR,".content p")
+    BASKET_ITEMS=(By.CSS_SELECTOR,".basket-items")

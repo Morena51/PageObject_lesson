@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoAlertPresentException # в начале файла
 from selenium.common.exceptions import NoSuchElementException
+from .locators import BasePageLocators
 import math
 class BasePage(object):
     def __init__(self, browser, url,timeout=10):
@@ -26,3 +27,12 @@ class BasePage(object):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def go_to_login_page(self):
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
+        link.click()
+        alert = self.browser.switch_to.alert
+        alert.accept()
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"

@@ -2,6 +2,7 @@ import pytest
 import time
 from .pages.product_page import ProductPage
 from .pages.locators import ProductPageLocators
+from .pages.cart_page import CartPage
 
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8","http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
 @pytest.mark.skip
@@ -51,4 +52,13 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     link="http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     browser.get(link)
     product_page = ProductPage(browser, link)
-    product_page.should_be_login_link() #Проверяем что состранице продукта можно попасть на страницу логина
+    product_page.should_be_login_link() #Проверяем что со страницы продукта можно попасть на страницу логина
+
+def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
+    link="http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    browser.get(link)
+    product_page = ProductPage(browser, link)
+    product_page.go_to_basket_page()
+    basket_page=CartPage(browser,browser.current_url)
+    basket_page.check_text_empty_basket() # проверяем что есть текст для пустой корзины
+    basket_page.check_empty_basket() # проверяем корзинапустая

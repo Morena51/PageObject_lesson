@@ -18,7 +18,7 @@ def test_guest_can_add_product_to_cart(browser,link):
     product_page.check_add_product_message() #проверяем название продукта в сообщении
     product_page.check_add_product_price() # проверяем стоимость товаров в корзине
 
-@pytest.mark.skip
+@pytest.mark.xfail  #падающий тест, требовалось проверить в одном из заданий курса (на отрицательные  проверки)
 def test_guest_cant_see_success_message_after_adding_product_to_cart(browser):
     link="http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     browser.get(link)
@@ -34,8 +34,8 @@ def test_guest_cant_see_success_message(browser):
     product_page.open()
     product_page.is_not_element_present(*ProductPageLocators.BASKET_MESSAGE) # Проверяем, что нет сообщения об успехе с помощью is_not_element_present
     
-@xfail
-def test_message_disappeared_after_adding_product_to_cart(browser): #падающий тест, требовалось проверить в одном из заданий курса
+@pytest.mark.xfail #падающий тест, требовалось проверить в одном из заданий курса (на отрицательные  проверки)
+def test_message_disappeared_after_adding_product_to_cart(browser):
     link="http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     browser.get(link)
     product_page = ProductPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
@@ -65,11 +65,11 @@ def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
     product_page.go_to_basket_page()
     basket_page=CartPage(browser,browser.current_url)
     basket_page.check_text_empty_basket() # проверяем что есть текст для пустой корзины
-    basket_page.check_empty_basket() # проверяем корзинапустая
+    basket_page.check_empty_basket() # проверяем корзина пустая
 
 @pytest.mark.for_user_test
 class TestUserAddToCartFromProductPage(object):
-    @pytest.fixture(scope="function", autouse=True)
+    @pytest.fixture(scope="function", autouse=True) # фикстура для регистрации пользователя
     def setup(self,browser):
         link="http://selenium1py.pythonanywhere.com/ru/accounts/login/"
         self.browser=browser
@@ -86,6 +86,7 @@ class TestUserAddToCartFromProductPage(object):
         product_page = ProductPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
         product_page.open()
         product_page.is_not_element_present(*ProductPageLocators.BASKET_MESSAGE) # Проверяем, что нет сообщения об успехе с помощью is_not_element_present
+    
     @pytest.mark.need_review
     def test_user_can_add_product_to_cart(self,browser):
         link="http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"

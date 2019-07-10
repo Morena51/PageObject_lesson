@@ -13,11 +13,12 @@ class TestLoginFromMainPage(object):
         page.go_to_login_page()          # выполняем метод страницы - переходим на страницу логина
         login_page=LoginPage(browser,browser.current_url)
         login_page.should_be_login_page()
+
     def test_guest_should_see_login_link(self,browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
         page = MainPage(browser, link)
         page.open()
-        page.should_be_login_link()
+        page.should_be_login_link() # проверяем что есть ссылка на страницу логина \ регистрации
 
 def test_guest_cant_see_product_in_cart_opened_from_main_page(browser):
     link="http://selenium1py.pythonanywhere.com/en-gb/"  
@@ -26,5 +27,5 @@ def test_guest_cant_see_product_in_cart_opened_from_main_page(browser):
     page.go_to_basket_page() # переходим в коризну из шапки сайта
     basket_page=CartPage(browser,browser.current_url)
     basket_page.check_text_empty_basket() # проверяем что есть текст для пустой корзины
-    basket_page.check_empty_basket() # проверяем корзинапустая
+    basket_page.check_empty_basket() # проверяем корзина пустая
 
